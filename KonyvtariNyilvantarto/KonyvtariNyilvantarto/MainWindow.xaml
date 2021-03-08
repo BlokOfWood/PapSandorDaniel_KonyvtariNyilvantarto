@@ -9,7 +9,18 @@
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="402" Margin="10,10,0,0" VerticalAlignment="Top" Width="774">
             <TabItem Header="Könyvek">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="BookDataGrid" HorizontalAlignment="Left" Height="354" Margin="10,10,0,0" VerticalAlignment="Top" Width="747" AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged" CanUserResizeColumns="False" CanUserReorderColumns="False">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Binding="{Binding ID}" ClipboardContentBinding="{x:Null}" Header="ID" Width="30"/>
+                            <DataGridTextColumn Binding="{Binding Author}" ClipboardContentBinding="{x:Null}" Header="Szerző" Width="150"/>
+                            <DataGridTextColumn Binding="{Binding Title}" ClipboardContentBinding="{x:Null}" Header="Cím" Width="200"/>
+                            <DataGridTextColumn Binding="{Binding ReleaseYear}" ClipboardContentBinding="{x:Null}" Header="Kiadás Éve" Width="75"/>
+                            <DataGridTextColumn Binding="{Binding Publisher}" ClipboardContentBinding="{x:Null}" Header="Kiadó" Width="200"/>
+                            <DataGridTextColumn Binding="{Binding IsBorrowable}" ClipboardContentBinding="{x:Null}" Header="Kölcsönözhető"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem Header="Tagok">
                 <Grid Background="#FFE5E5E5"/>

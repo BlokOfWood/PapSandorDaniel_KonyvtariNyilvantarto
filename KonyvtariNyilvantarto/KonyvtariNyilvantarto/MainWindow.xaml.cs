@@ -1,17 +1,48 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows;
+using System.Windows.Data;
 
 namespace KonyvtariNyilvantarto
 {
-    public class Könyv
+    public class Book
     {
-        public uint ID;
-        public string Szerző;
-        public string Cím;
-        public string KiadásÉve; //Stringként egyszerűbb kezelni és nincsen funkció amihez szükséges hogy DateTime vagy int legyen.
-        public string Kiadó;
-        public bool Kölcsönözhető;
+        uint _ID;
+        public string ID { get => _ID.ToString(); }
+
+        string _author;
+        public string Author { get => _author; }
+
+        string _title;
+        public string Title { get => _title; }
+
+        string _releaseYear;
+        public string ReleaseYear { get => _releaseYear; }
+
+        string _publisher;
+        public string Publisher { get => _publisher; }
+
+        public string IsBorrowable { get => _isBorrowable.ToString(); }
+        bool _isBorrowable;
+
+        public Book(string line)
+        {
+            string[] separatedLine = line.Split(';');
+
+            _ID = Convert.ToUInt32(separatedLine[0]);
+            _author = separatedLine[1];
+            _title = separatedLine[2];
+            _releaseYear = separatedLine[3];
+            _publisher = separatedLine[4];
+            _isBorrowable = Convert.ToBoolean(separatedLine[5]);
+        }
+
+        public string[] GetRow()
+        {
+            return new string[] { _ID.ToString(), _author, _title, _releaseYear, _publisher, _isBorrowable.ToString() };
+        }
     }
 
     public class Tag
@@ -37,27 +68,45 @@ namespace KonyvtariNyilvantarto
          */
         public string[] PathsToData = new string[3];
 
+        public List<Book> Books = new List<Book>();
+        public List<Tag> Tagok = new List<Tag>();
+        public List<Kölcsönzés> Kölcsönzések = new List<Kölcsönzés>();
+
         public MainWindow()
         {
             InitializeComponent();
 
             OpenFileDialog fileDialog = new OpenFileDialog()
             {
-                Filter = "txt files (*.txt)|*.txt",
+                Filter = "Könyvtár Állományok (*.txt)|*.txt",
                 RestoreDirectory = true
             };
 
             fileDialog.Title = "Válaszd ki a könyv állomány helyét";
             fileDialog.ShowDialog();
             PathsToData[0] = fileDialog.FileName;
-
+/*
             fileDialog.Title = "Válaszd ki a tag állomány helyét";
             fileDialog.ShowDialog();
             PathsToData[1] = fileDialog.FileName;
 
             fileDialog.Title = "Válaszd ki a kölcsönzés állomány helyét";
             fileDialog.ShowDialog();
-            PathsToData[2] = fileDialog.FileName;
+            PathsToData[2] = fileDialog.FileName;*/
+
+            string[] input = File.ReadAllLines(PathsToData[0]);
+
+            foreach (string i in input)
+            {
+                Books.Add(new Book(i));
+            }
+
+            BookDataGrid.ItemsSource = Books;
+        }
+
+        private void DataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
