@@ -5,21 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KonyvtariNyilvantarto"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="715.571" Width="1362.857" ResizeMode="NoResize">
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="402" Margin="10,10,0,0" VerticalAlignment="Top" Width="774">
+        <TabControl HorizontalAlignment="Left" Height="667" Margin="10,10,0,0" VerticalAlignment="Top" Width="765">
             <TabItem Header="Könyvek">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="BookDataGrid" HorizontalAlignment="Left" Height="354" Margin="10,10,0,0" VerticalAlignment="Top" Width="747" AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged" CanUserResizeColumns="False" CanUserReorderColumns="False">
-                        <DataGrid.Columns >
-                            <DataGridTextColumn Binding="{Binding ID}" ClipboardContentBinding="{x:Null}" Header="ID" Width="30"/>
-                            <DataGridTextColumn Binding="{Binding Author}" ClipboardContentBinding="{x:Null}" Header="Szerző" Width="150"/>
-                            <DataGridTextColumn Binding="{Binding Title}" ClipboardContentBinding="{x:Null}" Header="Cím" Width="200"/>
-                            <DataGridTextColumn Binding="{Binding ReleaseYear}" ClipboardContentBinding="{x:Null}" Header="Kiadás Éve" Width="75"/>
-                            <DataGridTextColumn Binding="{Binding Publisher}" ClipboardContentBinding="{x:Null}" Header="Kiadó" Width="200"/>
-                            <DataGridTextColumn Binding="{Binding IsBorrowable}" ClipboardContentBinding="{x:Null}" Header="Kölcsönözhető"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <DataGrid x:Name="BookDataGrid" Margin="10" SelectionChanged="BookDataGrid_SelectionChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tagok">
@@ -27,6 +18,18 @@
             </TabItem>
             <TabItem Header="Kölcsönzés"/>
         </TabControl>
+        <TextBlock HorizontalAlignment="Left" Margin="780,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="50" FontSize="24"><Run Text="ID"/><Run Text=":"/></TextBlock>
+        <TextBox x:Name="IDField" HorizontalAlignment="Left" Height="35" Margin="815,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.165,1.093" FontSize="22" IsEnabled="False" Text="-"/>
+        <TextBlock HorizontalAlignment="Left" Margin="780,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="90" FontSize="24"><Run Text="Szerző"/><Run Text=":"/></TextBlock>
+        <TextBox x:Name="AuthorField" HorizontalAlignment="Left" Height="35" Margin="875,90,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="780,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="50" FontSize="24" Text="Cím:"/>
+        <TextBox x:Name="TitleField" HorizontalAlignment="Left" Height="35" Margin="875,145,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="780,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="130" FontSize="24" Text="Kiadás Éve:"/>
+        <TextBox x:Name="ReleaseYearField" HorizontalAlignment="Left" Height="35" Margin="915,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False"/>
+        <TextBlock HorizontalAlignment="Left" Margin="780,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="75" FontSize="24" Text="Kiadó:"/>
+        <TextBox x:Name="PublisherField" HorizontalAlignment="Left" Height="35" Margin="875,255,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="780,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="165" FontSize="24" Text="Kölcsönözhető:"/>
+        <CheckBox x:Name="BorrowableCheck" Content="" HorizontalAlignment="Left" Margin="950,320,0,0" VerticalAlignment="Top" Width="20" Height="25" IsEnabled="False"/>
 
     </Grid>
 </Window>

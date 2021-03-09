@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Data;
@@ -10,7 +11,7 @@ namespace KonyvtariNyilvantarto
     public class Book
     {
         uint _ID;
-        public string ID { get => _ID.ToString(); }
+        public uint ID { get => _ID; }
 
         string _author;
         public string Author { get => _author; }
@@ -24,7 +25,7 @@ namespace KonyvtariNyilvantarto
         string _publisher;
         public string Publisher { get => _publisher; }
 
-        public string IsBorrowable { get => _isBorrowable.ToString(); }
+        public bool IsBorrowable { get => _isBorrowable; }
         bool _isBorrowable;
 
         public Book(string line)
@@ -37,11 +38,6 @@ namespace KonyvtariNyilvantarto
             _releaseYear = separatedLine[3];
             _publisher = separatedLine[4];
             _isBorrowable = Convert.ToBoolean(separatedLine[5]);
-        }
-
-        public string[] GetRow()
-        {
-            return new string[] { _ID.ToString(), _author, _title, _releaseYear, _publisher, _isBorrowable.ToString() };
         }
     }
 
@@ -104,9 +100,29 @@ namespace KonyvtariNyilvantarto
             BookDataGrid.ItemsSource = Books;
         }
 
-        private void DataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void BookDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            FillFields(BookDataGrid.SelectedIndex);
+        }
 
+        void FillFields(int index)
+        {
+            if(!AuthorField.IsEnabled)
+            {
+                AuthorField.IsEnabled = true;
+                TitleField.IsEnabled = true;
+                ReleaseYearField.IsEnabled = true;
+                PublisherField.IsEnabled = true;
+                BorrowableCheck.IsEnabled = true;
+            }
+
+
+            IDField.Text = Books[index].ID.ToString();
+            AuthorField.Text = Books[index].Author;
+            TitleField.Text = Books[index].Title;
+            ReleaseYearField.Text = Books[index].ReleaseYear;
+            PublisherField.Text = Books[index].Publisher;
+            BorrowableCheck.IsChecked = Books[index].IsBorrowable;
         }
     }
 }
