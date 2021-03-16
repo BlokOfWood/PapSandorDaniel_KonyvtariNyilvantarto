@@ -107,6 +107,8 @@ namespace KonyvtariNyilvantarto
 
         void FillFields(int index)
         {
+            if (index == -1) return;
+
             if(!AuthorField.IsEnabled)
             {
                 AuthorField.IsEnabled = true;
@@ -160,6 +162,18 @@ namespace KonyvtariNyilvantarto
                 Books[bookEntryID] = new Book(newLine);
             }
 
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            int bookEntryID = Books.ToList().FindIndex(x => x.ID == int.Parse(IDField.Text));
+            if(bookEntryID != -1)
+            {
+                Books.RemoveAt(bookEntryID);
+                List<string> currentFile = File.ReadAllLines(PathsToData[0]).ToList();
+                currentFile.RemoveAt(bookEntryID);
+                File.WriteAllLines(PathsToData[0], currentFile);
+            }
         }
     }
 }

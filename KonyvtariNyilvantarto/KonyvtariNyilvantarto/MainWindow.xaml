@@ -32,7 +32,7 @@
         <CheckBox x:Name="BorrowableCheck" Content="" HorizontalAlignment="Left" Margin="950,320,0,0" VerticalAlignment="Top" Width="20" Height="25" IsEnabled="False"/>
         <Button x:Name="NewBookButton" Content="Új könyv kezdése" HorizontalAlignment="Left" Margin="780,632,0,0" VerticalAlignment="Top" Width="250" Height="45" FontSize="20" Click="NewBookButton_Click"/>
         <Button x:Name="SaveButton" Content="Mentés" HorizontalAlignment="Left" Margin="1097,632,0,0" VerticalAlignment="Top" Width="250" Height="45" FontSize="20" Click="SaveButton_Click"/>
-        <Button x:Name="DeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="780,565,0,0" VerticalAlignment="Top" Width="567" Height="45" FontSize="20" Click="NewBookButton_Click"/>
+        <Button x:Name="DeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="780,565,0,0" VerticalAlignment="Top" Width="567" Height="45" FontSize="20" Click="DeleteButton_Click"/>
 
     </Grid>
 </Window>
