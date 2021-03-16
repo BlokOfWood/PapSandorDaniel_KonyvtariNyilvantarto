@@ -217,5 +217,30 @@ namespace KonyvtariNyilvantarto
         {
             MemberFillFields(MemberDataGrid.SelectedIndex);
         }
+
+        private void NewMemberButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!MemberNameField.IsEnabled)
+            {
+                MemberNameField.IsEnabled = true;
+                MemberAddressField.IsEnabled = true;
+            }
+
+            MemberIDField.Text = (Members[Members.Count - 1].ID + 1).ToString();
+            MemberNameField.Text = "";
+            MemberAddressField.Text = "";
+        }
+
+        private void MemberDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            int memberEntryID = Members.ToList().FindIndex(x => x.ID == int.Parse(MemberIDField.Text));
+            if (memberEntryID != -1)
+            {
+                Members.RemoveAt(memberEntryID);
+                List<string> currentFile = File.ReadAllLines(PathsToData[1]).ToList();
+                currentFile.RemoveAt(memberEntryID);
+                File.WriteAllLines(PathsToData[1], currentFile);
+            }
+        }
     }
 }

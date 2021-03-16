@@ -37,9 +37,9 @@
                     <TextBox x:Name="MemberNameField" HorizontalAlignment="Left" Height="37" Margin="399,78,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
                     <TextBlock HorizontalAlignment="Left" Margin="304,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="90" FontSize="24" Text="Lakcím:"/>
                     <TextBox x:Name="MemberAddressField" HorizontalAlignment="Left" Height="37" Margin="399,137,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
-                    <Button x:Name="NewMemberButton" Content="Új könyv kezdése" HorizontalAlignment="Left" Margin="304,658,0,0" VerticalAlignment="Top" Width="250" Height="48" FontSize="20"/>
+                    <Button x:Name="NewMemberButton" Content="Új tag felvétele" HorizontalAlignment="Left" Margin="304,658,0,0" VerticalAlignment="Top" Width="250" Height="48" FontSize="20" Click="NewMemberButton_Click"/>
                     <Button x:Name="MemberSaveButton" Content="Mentés" HorizontalAlignment="Left" Margin="621,658,0,0" VerticalAlignment="Top" Width="250" Height="48" FontSize="20"/>
-                    <Button x:Name="MemberDeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="304,586,0,0" VerticalAlignment="Top" Width="567" Height="48" FontSize="20"/>
+                    <Button x:Name="MemberDeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="304,586,0,0" VerticalAlignment="Top" Width="567" Height="48" FontSize="20" Click="MemberDeleteButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Kölcsönzés"/>
