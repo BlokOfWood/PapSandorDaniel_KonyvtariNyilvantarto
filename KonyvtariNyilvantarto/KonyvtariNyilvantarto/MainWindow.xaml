@@ -5,12 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KonyvtariNyilvantarto"
         mc:Ignorable="d"
-        Title="MainWindow" Height="715.571" Width="1362.857" ResizeMode="NoResize">
+        Title="MainWindow" Height="800.571" Width="1500" ResizeMode="NoResize">
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="667" Margin="10,10,0,0" VerticalAlignment="Top" Width="765">
+        <TabControl HorizontalAlignment="Left" Height="752" Margin="10,10,0,0" VerticalAlignment="Top" Width="1474">
             <TabItem Header="Könyvek">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="BookDataGrid" Margin="10" SelectionChanged="BookDataGrid_SelectionChanged"/>
+                    <DataGrid x:Name="BookDataGrid" Margin="10,10,712,10.429" SelectionChanged="BookDataGrid_SelectionChanged"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="780,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="50" FontSize="24"><Run Text="ID"/><Run Text=":"/></TextBlock>
+                    <TextBox x:Name="IDField" HorizontalAlignment="Left" Height="35" Margin="815,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.165,1.093" FontSize="22" IsEnabled="False" Text="-"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="780,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="90" FontSize="24"><Run Text="Szerző"/><Run Text=":"/></TextBlock>
+                    <TextBox x:Name="AuthorField" HorizontalAlignment="Left" Height="35" Margin="875,90,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="780,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="50" FontSize="24" Text="Cím:"/>
+                    <TextBox x:Name="TitleField" HorizontalAlignment="Left" Height="35" Margin="875,145,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="780,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="130" FontSize="24" Text="Kiadás Éve:"/>
+                    <TextBox x:Name="ReleaseYearField" HorizontalAlignment="Left" Height="35" Margin="915,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="780,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="75" FontSize="24" Text="Kiadó:"/>
+                    <TextBox x:Name="PublisherField" HorizontalAlignment="Left" Height="35" Margin="875,255,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="780,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="165" FontSize="24" Text="Kölcsönözhető:"/>
+                    <CheckBox x:Name="BorrowableCheck" Content="" HorizontalAlignment="Left" Margin="950,320,0,0" VerticalAlignment="Top" Width="20" Height="25" IsEnabled="False"/>
+                    <Button x:Name="NewBookButton" Content="Új könyv kezdése" HorizontalAlignment="Left" Margin="780,632,0,0" VerticalAlignment="Top" Width="250" Height="45" FontSize="20" Click="NewBookButton_Click"/>
+                    <Button x:Name="SaveButton" Content="Mentés" HorizontalAlignment="Left" Margin="1097,632,0,0" VerticalAlignment="Top" Width="250" Height="45" FontSize="20" Click="BookSaveButton_Click"/>
+                    <Button x:Name="DeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="780,565,0,0" VerticalAlignment="Top" Width="567" Height="45" FontSize="20" Click="BookDeleteButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tagok">
@@ -18,21 +33,6 @@
             </TabItem>
             <TabItem Header="Kölcsönzés"/>
         </TabControl>
-        <TextBlock HorizontalAlignment="Left" Margin="780,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="50" FontSize="24"><Run Text="ID"/><Run Text=":"/></TextBlock>
-        <TextBox x:Name="IDField" HorizontalAlignment="Left" Height="35" Margin="815,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.165,1.093" FontSize="22" IsEnabled="False" Text="-"/>
-        <TextBlock HorizontalAlignment="Left" Margin="780,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="90" FontSize="24"><Run Text="Szerző"/><Run Text=":"/></TextBlock>
-        <TextBox x:Name="AuthorField" HorizontalAlignment="Left" Height="35" Margin="875,90,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="780,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="50" FontSize="24" Text="Cím:"/>
-        <TextBox x:Name="TitleField" HorizontalAlignment="Left" Height="35" Margin="875,145,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="780,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="130" FontSize="24" Text="Kiadás Éve:"/>
-        <TextBox x:Name="ReleaseYearField" HorizontalAlignment="Left" Height="35" Margin="915,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False"/>
-        <TextBlock HorizontalAlignment="Left" Margin="780,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="75" FontSize="24" Text="Kiadó:"/>
-        <TextBox x:Name="PublisherField" HorizontalAlignment="Left" Height="35" Margin="875,255,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="780,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="165" FontSize="24" Text="Kölcsönözhető:"/>
-        <CheckBox x:Name="BorrowableCheck" Content="" HorizontalAlignment="Left" Margin="950,320,0,0" VerticalAlignment="Top" Width="20" Height="25" IsEnabled="False"/>
-        <Button x:Name="NewBookButton" Content="Új könyv kezdése" HorizontalAlignment="Left" Margin="780,632,0,0" VerticalAlignment="Top" Width="250" Height="45" FontSize="20" Click="NewBookButton_Click"/>
-        <Button x:Name="SaveButton" Content="Mentés" HorizontalAlignment="Left" Margin="1097,632,0,0" VerticalAlignment="Top" Width="250" Height="45" FontSize="20" Click="SaveButton_Click"/>
-        <Button x:Name="DeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="780,565,0,0" VerticalAlignment="Top" Width="567" Height="45" FontSize="20" Click="DeleteButton_Click"/>
 
     </Grid>
 </Window>

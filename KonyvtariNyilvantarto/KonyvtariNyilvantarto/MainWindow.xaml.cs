@@ -81,12 +81,12 @@ namespace KonyvtariNyilvantarto
             fileDialog.Title = "Válaszd ki a könyv állomány helyét";
             fileDialog.ShowDialog();
             PathsToData[0] = fileDialog.FileName;
-/*
+
             fileDialog.Title = "Válaszd ki a tag állomány helyét";
             fileDialog.ShowDialog();
             PathsToData[1] = fileDialog.FileName;
 
-            fileDialog.Title = "Válaszd ki a kölcsönzés állomány helyét";
+            /*fileDialog.Title = "Válaszd ki a kölcsönzés állomány helyét";
             fileDialog.ShowDialog();
             PathsToData[2] = fileDialog.FileName;*/
 
@@ -102,10 +102,10 @@ namespace KonyvtariNyilvantarto
 
         private void BookDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            FillFields(BookDataGrid.SelectedIndex);
+            BookFillFields(BookDataGrid.SelectedIndex);
         }
 
-        void FillFields(int index)
+        void BookFillFields(int index)
         {
             if (index == -1) return;
 
@@ -146,7 +146,7 @@ namespace KonyvtariNyilvantarto
             BorrowableCheck.IsChecked = false;
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void BookSaveButton_Click(object sender, RoutedEventArgs e)
         {
             int bookEntryID = Books.ToList().FindIndex(x => x.ID == int.Parse(IDField.Text));
 
@@ -164,7 +164,7 @@ namespace KonyvtariNyilvantarto
 
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private void BookDeleteButton_Click(object sender, RoutedEventArgs e)
         {
             int bookEntryID = Books.ToList().FindIndex(x => x.ID == int.Parse(IDField.Text));
             if(bookEntryID != -1)
