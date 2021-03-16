@@ -41,11 +41,23 @@ namespace KonyvtariNyilvantarto
         }
     }
 
-    public class Tag
+    public class Member
     {
-        public uint ID;
-        public string Név;
-        public string Lakcím;
+        uint _ID;
+        public uint ID { get => _ID; }
+        string _name;
+        public string Name { get => _name; }
+        string _address;
+        public string Address { get => _address; }
+
+        public Member(string line)
+        {
+            string[] separatedLine = line.Split(';');
+
+            _ID = Convert.ToUInt32(separatedLine[0]);
+            _name = separatedLine[1];
+            _address = separatedLine[2];
+        }
     }
 
     public class Kölcsönzés
@@ -65,7 +77,7 @@ namespace KonyvtariNyilvantarto
         public string[] PathsToData = new string[3];
 
         public BindingList<Book> Books = new BindingList<Book>();
-        public List<Tag> Tagok = new List<Tag>();
+        public BindingList<Member> Members = new BindingList<Member>();
         public List<Kölcsönzés> Kölcsönzések = new List<Kölcsönzés>();
 
         public MainWindow()
@@ -91,13 +103,20 @@ namespace KonyvtariNyilvantarto
             PathsToData[2] = fileDialog.FileName;*/
 
             string[] input = File.ReadAllLines(PathsToData[0]);
-
             foreach (string i in input)
             {
                 Books.Add(new Book(i));
             }
 
             BookDataGrid.ItemsSource = Books;
+
+            input = File.ReadAllLines(PathsToData[1]);
+            foreach(string i in input)
+            {
+                Members.Add(new Member(i));
+            }
+
+            MemberDataGrid.ItemsSource = Members;
         }
 
         private void BookDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
