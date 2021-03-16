@@ -30,16 +30,16 @@
             </TabItem>
             <TabItem Header="Tagok">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="MemberDataGrid" Margin="10,10,1207,10.429" SelectionChanged="MemberDataGrid_SelectionChanged"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="304,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="50" FontSize="24"><Run Text="ID"/><Run Text=":"/></TextBlock>
-                    <TextBox x:Name="MemberIDField" HorizontalAlignment="Left" Height="37" Margin="339,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.165,1.093" FontSize="22" IsEnabled="False" Text="-"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="304,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="90" FontSize="24" Text="Név"/>
-                    <TextBox x:Name="MemberNameField" HorizontalAlignment="Left" Height="37" Margin="399,78,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="304,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="90" FontSize="24" Text="Lakcím:"/>
-                    <TextBox x:Name="MemberAddressField" HorizontalAlignment="Left" Height="37" Margin="399,137,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
-                    <Button x:Name="NewMemberButton" Content="Új tag felvétele" HorizontalAlignment="Left" Margin="304,658,0,0" VerticalAlignment="Top" Width="250" Height="48" FontSize="20" Click="NewMemberButton_Click"/>
-                    <Button x:Name="MemberSaveButton" Content="Mentés" HorizontalAlignment="Left" Margin="621,658,0,0" VerticalAlignment="Top" Width="250" Height="48" FontSize="20"/>
-                    <Button x:Name="MemberDeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="304,586,0,0" VerticalAlignment="Top" Width="567" Height="48" FontSize="20" Click="MemberDeleteButton_Click"/>
+                    <DataGrid x:Name="MemberDataGrid" Margin="10,10,1007,10.429" SelectionChanged="MemberDataGrid_SelectionChanged"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="466,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="50" FontSize="24"><Run Text="ID"/><Run Text=":"/></TextBlock>
+                    <TextBox x:Name="MemberIDField" HorizontalAlignment="Left" Height="37" Margin="501,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.165,1.093" FontSize="22" IsEnabled="False" Text="-"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="466,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="90" FontSize="24" Text="Név"/>
+                    <TextBox x:Name="MemberNameField" HorizontalAlignment="Left" Height="37" Margin="561,76,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="466,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="90" FontSize="24" Text="Lakcím:"/>
+                    <TextBox x:Name="MemberAddressField" HorizontalAlignment="Left" Height="37" Margin="561,135,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
+                    <Button x:Name="NewMemberButton" Content="Új tag felvétele" HorizontalAlignment="Left" Margin="466,656,0,0" VerticalAlignment="Top" Width="250" Height="48" FontSize="20" Click="NewMemberButton_Click"/>
+                    <Button x:Name="MemberSaveButton" Content="Mentés" HorizontalAlignment="Left" Margin="783,656,0,0" VerticalAlignment="Top" Width="250" Height="48" FontSize="20" Click="MemberSaveButton_Click"/>
+                    <Button x:Name="MemberDeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="466,584,0,0" VerticalAlignment="Top" Width="567" Height="48" FontSize="20" Click="MemberDeleteButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Kölcsönzés"/>

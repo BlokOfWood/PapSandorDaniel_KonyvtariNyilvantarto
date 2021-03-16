@@ -46,9 +46,9 @@ namespace KonyvtariNyilvantarto
         uint _ID;
         public uint ID { get => _ID; }
         string _name;
-        public string Name { get => _name; }
+        public string Név { get => _name; }
         string _address;
-        public string Address { get => _address; }
+        public string Lakcím { get => _address; }
 
         public Member(string line)
         {
@@ -56,7 +56,7 @@ namespace KonyvtariNyilvantarto
 
             _ID = Convert.ToUInt32(separatedLine[0]);
             _name = separatedLine[1];
-            _address = separatedLine[2];
+            _address = string.Join(", ",separatedLine.Skip(2));
         }
     }
 
@@ -105,6 +105,7 @@ namespace KonyvtariNyilvantarto
             string[] input = File.ReadAllLines(PathsToData[0]);
             foreach (string i in input)
             {
+                if (i.Trim() == "") continue;
                 Books.Add(new Book(i));
             }
 
@@ -113,6 +114,7 @@ namespace KonyvtariNyilvantarto
             input = File.ReadAllLines(PathsToData[1]);
             foreach(string i in input)
             {
+                if (i.Trim() == "") continue;
                 Members.Add(new Member(i));
             }
 
@@ -209,8 +211,8 @@ namespace KonyvtariNyilvantarto
             }
 
             MemberIDField.Text = Members[index].ID.ToString();
-            MemberNameField.Text = Members[index].Name;
-            MemberAddressField.Text = Members[index].Address;
+            MemberNameField.Text = Members[index].Név;
+            MemberAddressField.Text = Members[index].Lakcím;
         }
 
         private void MemberDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -240,6 +242,22 @@ namespace KonyvtariNyilvantarto
                 List<string> currentFile = File.ReadAllLines(PathsToData[1]).ToList();
                 currentFile.RemoveAt(memberEntryID);
                 File.WriteAllLines(PathsToData[1], currentFile);
+            }
+        }
+
+        private void MemberSaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            int memberEntryID = Members.ToList().FindIndex(x => x.ID == int.Parse(MemberIDField.Text));
+
+            string newLine = $"\n{MemberIDField.Text};{MemberNameField.Text};{MemberAddressField.Text.Replace(", ", ";")}";
+            if (memberEntryID == -1)
+            {
+                File.AppendAllText(PathsToData[1], newLine);
+                Members.Add(new Member(newLine));
+            }
+            else
+            {
+                Members[memberEntryID] = new Member(newLine);
             }
         }
     }
