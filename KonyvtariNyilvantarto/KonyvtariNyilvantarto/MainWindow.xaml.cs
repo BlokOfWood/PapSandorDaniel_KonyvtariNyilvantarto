@@ -119,6 +119,7 @@ namespace KonyvtariNyilvantarto
             MemberDataGrid.ItemsSource = Members;
         }
 
+        /* Könyv fül*/
         private void BookDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             BookFillFields(BookDataGrid.SelectedIndex);
@@ -193,6 +194,28 @@ namespace KonyvtariNyilvantarto
                 currentFile.RemoveAt(bookEntryID);
                 File.WriteAllLines(PathsToData[0], currentFile);
             }
+        }
+
+        /* Tagok fül */
+
+        void MemberFillFields(int index)
+        {
+            if (index == -1) return;
+
+            if (!MemberNameField.IsEnabled)
+            {
+                MemberNameField.IsEnabled = true;
+                MemberAddressField.IsEnabled = true;
+            }
+
+            MemberIDField.Text = Members[index].ID.ToString();
+            MemberNameField.Text = Members[index].Name;
+            MemberAddressField.Text = Members[index].Address;
+        }
+
+        private void MemberDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            MemberFillFields(MemberDataGrid.SelectedIndex);
         }
     }
 }
