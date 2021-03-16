@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
-using System.Windows.Data;
 
 namespace KonyvtariNyilvantarto
 {
@@ -14,18 +14,18 @@ namespace KonyvtariNyilvantarto
         public uint ID { get => _ID; }
 
         string _author;
-        public string Author { get => _author; }
+        public string Szerző { get => _author; }
 
         string _title;
-        public string Title { get => _title; }
+        public string Cím { get => _title; }
 
         string _releaseYear;
-        public string ReleaseYear { get => _releaseYear; }
+        public string KiadásÉve { get => _releaseYear; }
 
         string _publisher;
-        public string Publisher { get => _publisher; }
+        public string Kiadó { get => _publisher; }
 
-        public bool IsBorrowable { get => _isBorrowable; }
+        public bool Kölcsönözhető { get => _isBorrowable; }
         bool _isBorrowable;
 
         public Book(string line)
@@ -64,7 +64,7 @@ namespace KonyvtariNyilvantarto
          */
         public string[] PathsToData = new string[3];
 
-        public List<Book> Books = new List<Book>();
+        public BindingList<Book> Books = new BindingList<Book>();
         public List<Tag> Tagok = new List<Tag>();
         public List<Kölcsönzés> Kölcsönzések = new List<Kölcsönzés>();
 
@@ -118,11 +118,48 @@ namespace KonyvtariNyilvantarto
 
 
             IDField.Text = Books[index].ID.ToString();
-            AuthorField.Text = Books[index].Author;
-            TitleField.Text = Books[index].Title;
-            ReleaseYearField.Text = Books[index].ReleaseYear;
-            PublisherField.Text = Books[index].Publisher;
-            BorrowableCheck.IsChecked = Books[index].IsBorrowable;
+            AuthorField.Text = Books[index].Szerző;
+            TitleField.Text = Books[index].Cím;
+            ReleaseYearField.Text = Books[index].KiadásÉve;
+            PublisherField.Text = Books[index].Kiadó;
+            BorrowableCheck.IsChecked = Books[index].Kölcsönözhető;
+        }
+
+        private void NewBookButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!AuthorField.IsEnabled) //Mivel egyszerre tesszük módosíthatóvá a mezőket ezért egyet elég leellenőrizni hogy engedélyezve van-e
+            {
+                AuthorField.IsEnabled = true;
+                TitleField.IsEnabled = true;
+                ReleaseYearField.IsEnabled = true;
+                PublisherField.IsEnabled = true;
+                BorrowableCheck.IsEnabled = true;
+            }
+
+            IDField.Text = (Books[Books.Count - 1].ID + 1).ToString();
+            AuthorField.Text = "";
+            TitleField.Text = "";
+            ReleaseYearField.Text = "";
+            PublisherField.Text = "";
+            BorrowableCheck.IsChecked = false;
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            int bookEntryID = Books.ToList().FindIndex(x => x.ID == int.Parse(IDField.Text));
+
+            string borrowableString = BorrowableCheck.IsChecked.ToString().ToUpper()[0] + BorrowableCheck.IsChecked.ToString().Substring(1);
+            string newLine = $"\n{IDField.Text};{AuthorField.Text};{TitleField.Text};{ReleaseYearField.Text};{PublisherField.Text};{borrowableString}";
+            if (bookEntryID == -1)
+            {
+                File.AppendAllText(PathsToData[0], newLine);
+                Books.Add(new Book(newLine));
+            }
+            else
+            {
+                Books[bookEntryID] = new Book(newLine);
+            }
+
         }
     }
 }
