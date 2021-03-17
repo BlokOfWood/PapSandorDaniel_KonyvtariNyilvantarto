@@ -37,9 +37,11 @@
                     <TextBox x:Name="MemberNameField" HorizontalAlignment="Left" Height="37" Margin="561,76,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
                     <TextBlock HorizontalAlignment="Left" Margin="466,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="90" FontSize="24" Text="Lakcím:"/>
                     <TextBox x:Name="MemberAddressField" HorizontalAlignment="Left" Height="37" Margin="561,135,0,0" VerticalAlignment="Top" Width="472" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="-" IsEnabled="False" MaxLines="1"/>
-                    <Button x:Name="NewMemberButton" Content="Új tag felvétele" HorizontalAlignment="Left" Margin="466,656,0,0" VerticalAlignment="Top" Width="250" Height="48" FontSize="20" Click="NewMemberButton_Click"/>
-                    <Button x:Name="MemberSaveButton" Content="Mentés" HorizontalAlignment="Left" Margin="783,656,0,0" VerticalAlignment="Top" Width="250" Height="48" FontSize="20" Click="MemberSaveButton_Click"/>
-                    <Button x:Name="MemberDeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="466,584,0,0" VerticalAlignment="Top" Width="567" Height="48" FontSize="20" Click="MemberDeleteButton_Click"/>
+                    <Button x:Name="NewMemberButton" Content="Új tag felvétele" HorizontalAlignment="Left" Margin="466,656,0,0" VerticalAlignment="Top" Width="485" Height="48" FontSize="20" Click="NewMemberButton_Click"/>
+                    <Button x:Name="MemberSaveButton" Content="Mentés" HorizontalAlignment="Left" Margin="986,656,0,0" VerticalAlignment="Top" Width="472" Height="48" FontSize="20" Click="MemberSaveButton_Click"/>
+                    <Button x:Name="MemberDeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="466,584,0,0" VerticalAlignment="Top" Width="992" Height="48" FontSize="20" Click="MemberDeleteButton_Click"/>
+                    <DataGrid x:Name="MemberBorrowedBooksGrid" Margin="466,224,10,144.429" SelectionChanged="MemberDataGrid_SelectionChanged"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="466,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="405" FontSize="24" Text="Kölcsönzött Könyvek"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Kölcsönzés"/>

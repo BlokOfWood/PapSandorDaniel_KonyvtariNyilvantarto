@@ -60,11 +60,19 @@ namespace KonyvtariNyilvantarto
         }
     }
 
-    public class Kölcsönzés
+    public class Borrow
     {
         public uint TagID;
         public uint KönyvID;
         public DateTime Dátum;
+
+        public Borrow(string line)
+        {
+            string[] separatedLine = line.Split(';');
+            TagID = Convert.ToUInt32(separatedLine[0]);
+            KönyvID = Convert.ToUInt32(separatedLine[1]);
+            Dátum = DateTime.ParseExact(separatedLine[2], "yyyy.MM.dd.", null);
+        }
     }
 
     public partial class MainWindow : Window
@@ -78,7 +86,8 @@ namespace KonyvtariNyilvantarto
 
         public BindingList<Book> Books = new BindingList<Book>();
         public BindingList<Member> Members = new BindingList<Member>();
-        public List<Kölcsönzés> Kölcsönzések = new List<Kölcsönzés>();
+        public BindingList<Borrow> CurrentMemberBorrows = new BindingList<Borrow>();
+        public BindingList<Borrow> Borrows = new BindingList<Borrow>();
 
         public MainWindow()
         {
@@ -98,9 +107,9 @@ namespace KonyvtariNyilvantarto
             fileDialog.ShowDialog();
             PathsToData[1] = fileDialog.FileName;
 
-            /*fileDialog.Title = "Válaszd ki a kölcsönzés állomány helyét";
+            fileDialog.Title = "Válaszd ki a kölcsönzés állomány helyét";
             fileDialog.ShowDialog();
-            PathsToData[2] = fileDialog.FileName;*/
+            PathsToData[2] = fileDialog.FileName;
 
             string[] input = File.ReadAllLines(PathsToData[0]);
             foreach (string i in input)
@@ -119,6 +128,13 @@ namespace KonyvtariNyilvantarto
             }
 
             MemberDataGrid.ItemsSource = Members;
+
+            input = File.ReadAllLines(PathsToData[2]);
+            foreach(string i in input)
+            {
+                if (i.Trim() == "") continue;
+                Borrows.Add(new Borrow(i));
+            }
         }
 
         /* Könyv fül*/
