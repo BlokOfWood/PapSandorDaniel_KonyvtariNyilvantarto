@@ -308,6 +308,11 @@ namespace KonyvtariNyilvantarto
             foundResults = Borrows.Where(x => searchedBooks.Exists(y => y.ID == x.KönyvID)).ToList();
             foundResults = foundResults.Where(x => searchedMembers.Exists(y => y.ID == x.TagID)).ToList();
             
+            if((bool)OnlyExpiredCheck.IsChecked)
+            {
+                foundResults = foundResults.Where(x => x.KölcsönzésVisszavétele == null && (DateTime.Now - x.KölcsönzésDátuma).TotalDays > 30).ToList();
+            }
+
             DisplayedBorrows.Clear();
             foundResults.ForEach(x => DisplayedBorrows.Add(x));
         }
