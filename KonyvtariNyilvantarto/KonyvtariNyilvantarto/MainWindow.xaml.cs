@@ -70,8 +70,8 @@ namespace KonyvtariNyilvantarto
         public uint KönyvID { get => _bookID; }
         DateTime _borrowDate;
         public DateTime KölcsönzésDátuma { get => _borrowDate; }
-        DateTime? _borrowExpireDate;
-        public DateTime? KölcsönzésLejárata { get => _borrowExpireDate; }
+        DateTime? _returnDate;
+        public DateTime? KölcsönzésVisszavétele { get => _returnDate; }
 
         public Borrow(string line)
         {
@@ -82,9 +82,9 @@ namespace KonyvtariNyilvantarto
             _bookID = Convert.ToUInt32(separatedLine[2]);
             _borrowDate = DateTime.ParseExact(separatedLine[3], "yyyy.MM.dd.", null);
             if (separatedLine[4] != "")
-                _borrowExpireDate = DateTime.ParseExact(separatedLine[4], "yyyy.MM.dd.", null);
+                _returnDate = DateTime.ParseExact(separatedLine[4], "yyyy.MM.dd.", null);
             else
-                _borrowExpireDate = null;
+                _returnDate = null;
         }
     }
 
@@ -298,5 +298,26 @@ namespace KonyvtariNyilvantarto
 
         /* Kölcsönzések fül */
 
+        private void BorrowSearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<Borrow> foundResults = new List<Borrow>();
+            List<Book> searchedBooks = Books.Where(x => x.Szerző.ToLower().StartsWith(BorrowSearchAuthorField.Text.ToLower())).ToList();
+            searchedBooks = searchedBooks.Intersect(Books.Where(x => x.Cím.ToLower().StartsWith(BorrowSearchTitleField.Text.ToLower())), new BorrowEquality()).ToList();
+            List<Member> searchedMembers = Members.Where(x => x.Név.ToLower().StartsWith(BorrowSearchMemberField.Text.ToLower())).ToList();
+
+            foundResults = Borrows.Where(x => searchedBooks.Exists(y => y.ID == x.KönyvID)).ToList();
+            foundResults = foundResults.Where(x => searchedMembers.Exists(y => y.ID == x.TagID)).ToList();
+            
+            DisplayedBorrows.Clear();
+            foundResults.ForEach(x => DisplayedBorrows.Add(x));
+        }
+
+        class BorrowEquality : IEqualityComparer<Book>
+        {
+            public bool Equals(Book b1, Book b2) => b1.ID == b2.ID;
+
+            public int GetHashCode(Book book) => book.GetHashCode();
+            
+        }
     }
 }
