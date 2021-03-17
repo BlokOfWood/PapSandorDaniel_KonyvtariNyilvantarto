@@ -70,8 +70,8 @@ namespace KonyvtariNyilvantarto
         public uint KönyvID { get => _bookID; }
         DateTime _borrowDate;
         public DateTime KölcsönzésDátuma { get => _borrowDate; }
-        DateTime _borrowExpireDate;
-        public DateTime KölcsönzésLejárata { get => _borrowExpireDate; }
+        DateTime? _borrowExpireDate;
+        public DateTime? KölcsönzésLejárata { get => _borrowExpireDate; }
 
         public Borrow(string line)
         {
@@ -81,7 +81,10 @@ namespace KonyvtariNyilvantarto
             _borrowerID = Convert.ToUInt32(separatedLine[1]);
             _bookID = Convert.ToUInt32(separatedLine[2]);
             _borrowDate = DateTime.ParseExact(separatedLine[3], "yyyy.MM.dd.", null);
-            _borrowExpireDate = DateTime.ParseExact(separatedLine[4], "yyyy.MM.dd.", null);
+            if (separatedLine[4] != "")
+                _borrowExpireDate = DateTime.ParseExact(separatedLine[4], "yyyy.MM.dd.", null);
+            else
+                _borrowExpireDate = null;
         }
     }
 
@@ -128,7 +131,6 @@ namespace KonyvtariNyilvantarto
                 Books.Add(new Book(i));
             }
 
-            BookDataGrid.ItemsSource = Books;
 
             input = File.ReadAllLines(PathsToData[1]);
             foreach(string i in input)
@@ -137,7 +139,6 @@ namespace KonyvtariNyilvantarto
                 Members.Add(new Member(i));
             }
 
-            MemberDataGrid.ItemsSource = Members;
 
             input = File.ReadAllLines(PathsToData[2]);
             foreach(string i in input)
@@ -145,6 +146,10 @@ namespace KonyvtariNyilvantarto
                 if (i.Trim() == "") continue;
                 Borrows.Add(new Borrow(i));
             }
+
+            BookDataGrid.ItemsSource = Books;
+            MemberDataGrid.ItemsSource = Members;
+            MemberBorrowedBooksGrid.ItemsSource = CurrentMemberBorrows;
         }
 
         /* Könyv fül*/
@@ -239,6 +244,9 @@ namespace KonyvtariNyilvantarto
             MemberIDField.Text = Members[index].ID.ToString();
             MemberNameField.Text = Members[index].Név;
             MemberAddressField.Text = Members[index].Lakcím;
+
+            CurrentMemberBorrows.Clear();
+            MemberBorrowedBooksGrid.ItemsSource = Borrows.Where(x => x.TagID == Members[index].ID);
         }
 
         private void MemberDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
