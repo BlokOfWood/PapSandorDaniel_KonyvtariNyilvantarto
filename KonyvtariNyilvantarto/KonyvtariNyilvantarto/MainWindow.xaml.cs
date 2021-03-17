@@ -62,16 +62,26 @@ namespace KonyvtariNyilvantarto
 
     public class Borrow
     {
-        public uint TagID;
-        public uint KönyvID;
-        public DateTime Dátum;
+        uint _ID;
+        public uint ID { get => _ID; }
+        uint _borrowerID;
+        public uint TagID { get => _borrowerID; }
+        uint _bookID;
+        public uint KönyvID { get => _bookID; }
+        DateTime _borrowDate;
+        public DateTime KölcsönzésDátuma { get => _borrowDate; }
+        DateTime _borrowExpireDate;
+        public DateTime KölcsönzésLejárata { get => _borrowExpireDate; }
 
         public Borrow(string line)
         {
             string[] separatedLine = line.Split(';');
-            TagID = Convert.ToUInt32(separatedLine[0]);
-            KönyvID = Convert.ToUInt32(separatedLine[1]);
-            Dátum = DateTime.ParseExact(separatedLine[2], "yyyy.MM.dd.", null);
+
+            _borrowerID = Convert.ToUInt32(separatedLine[0]);
+            _borrowerID = Convert.ToUInt32(separatedLine[1]);
+            _bookID = Convert.ToUInt32(separatedLine[2]);
+            _borrowDate = DateTime.ParseExact(separatedLine[3], "yyyy.MM.dd.", null);
+            _borrowExpireDate = DateTime.ParseExact(separatedLine[4], "yyyy.MM.dd.", null);
         }
     }
 
