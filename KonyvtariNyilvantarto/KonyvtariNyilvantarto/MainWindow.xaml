@@ -40,11 +40,27 @@
                     <Button x:Name="NewMemberButton" Content="Új tag felvétele" HorizontalAlignment="Left" Margin="751,656,0,0" VerticalAlignment="Top" Width="346" Height="48" FontSize="20" Click="NewMemberButton_Click"/>
                     <Button x:Name="MemberSaveButton" Content="Mentés" HorizontalAlignment="Left" Margin="1122,656,0,0" VerticalAlignment="Top" Width="336" Height="48" FontSize="20" Click="MemberSaveButton_Click"/>
                     <Button x:Name="MemberDeleteButton" Content="Törlés" HorizontalAlignment="Left" Margin="751,584,0,0" VerticalAlignment="Top" Width="707" Height="48" FontSize="20" Click="MemberDeleteButton_Click"/>
-                    <DataGrid x:Name="MemberBorrowedBooksGrid" Margin="751,224,10,144.429" SelectionChanged="MemberDataGrid_SelectionChanged"/>
+                    <DataGrid x:Name="MemberBorrowedBooksGrid" Margin="751,224,10,144.429"/>
                     <TextBlock HorizontalAlignment="Left" Margin="751,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="289" FontSize="24" Text="Kölcsönzött Könyvek"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Kölcsönzés"/>
+            <TabItem Header="Kölcsönzés">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="19*"/>
+                        <ColumnDefinition Width="348*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="BorrowDataGrid" Margin="10,10,747,10.429" SelectionChanged="MemberDataGrid_SelectionChanged" Grid.ColumnSpan="2"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="675,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="125" FontSize="24" Grid.Column="1" Text="Szerző:"/>
+                    <TextBox x:Name="BorrowSearchAuthorField" HorizontalAlignment="Left" Height="37" Margin="805,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="577" RenderTransformOrigin="0.165,1.093" FontSize="22" Grid.Column="1"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="675,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="125" FontSize="24" Grid.Column="1"><Run Text="Könyvcím"/><Run Text=":"/></TextBlock>
+                    <TextBox x:Name="BorrowSearchTitleField" HorizontalAlignment="Left" Height="37" Margin="805,76,0,0" VerticalAlignment="Top" Width="577" RenderTransformOrigin="0.165,1.093" FontSize="22" Text="&#xD;&#xA;" MaxLines="1" Grid.Column="1"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="675,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="125" FontSize="24" Text="Tag:" Grid.Column="1"/>
+                    <TextBox x:Name="BorrowSearchMember" HorizontalAlignment="Left" Height="37" Margin="805,135,0,0" VerticalAlignment="Top" Width="577" RenderTransformOrigin="0.165,1.093" FontSize="22" MaxLines="1" Grid.Column="1"/>
+                    <Button x:Name="BorrowSearchButton" Content="Keresés" HorizontalAlignment="Left" Margin="674.714,584,0,0" VerticalAlignment="Top" Width="707" Height="48" FontSize="20" Click="MemberDeleteButton_Click" Grid.Column="1"/>
+                    <CheckBox x:Name="OnlyExpiredCheck" Content="Csak lejárt kölcsönzések" Grid.Column="1" HorizontalAlignment="Left" Margin="675,529,0,0" VerticalAlignment="Top" Height="35" Width="707" FontSize="24"/>
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>

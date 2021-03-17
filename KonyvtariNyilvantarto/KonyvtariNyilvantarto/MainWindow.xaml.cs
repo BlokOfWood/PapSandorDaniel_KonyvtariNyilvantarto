@@ -77,7 +77,7 @@ namespace KonyvtariNyilvantarto
         {
             string[] separatedLine = line.Split(';');
 
-            _borrowerID = Convert.ToUInt32(separatedLine[0]);
+            _ID = Convert.ToUInt32(separatedLine[0]);
             _borrowerID = Convert.ToUInt32(separatedLine[1]);
             _bookID = Convert.ToUInt32(separatedLine[2]);
             _borrowDate = DateTime.ParseExact(separatedLine[3], "yyyy.MM.dd.", null);
@@ -99,8 +99,8 @@ namespace KonyvtariNyilvantarto
 
         public BindingList<Book> Books = new BindingList<Book>();
         public BindingList<Member> Members = new BindingList<Member>();
-        public BindingList<Borrow> CurrentMemberBorrows = new BindingList<Borrow>();
-        public BindingList<Borrow> Borrows = new BindingList<Borrow>();
+        public List<Borrow> Borrows = new List<Borrow>();
+        public BindingList<Borrow> DisplayedBorrows = new BindingList<Borrow>();
 
         public MainWindow()
         {
@@ -149,7 +149,9 @@ namespace KonyvtariNyilvantarto
 
             BookDataGrid.ItemsSource = Books;
             MemberDataGrid.ItemsSource = Members;
-            MemberBorrowedBooksGrid.ItemsSource = CurrentMemberBorrows;
+            BorrowDataGrid.ItemsSource = DisplayedBorrows;
+
+            Borrows.ForEach(x => DisplayedBorrows.Add(x));
         }
 
         /* Könyv fül*/
@@ -245,7 +247,6 @@ namespace KonyvtariNyilvantarto
             MemberNameField.Text = Members[index].Név;
             MemberAddressField.Text = Members[index].Lakcím;
 
-            CurrentMemberBorrows.Clear();
             MemberBorrowedBooksGrid.ItemsSource = Borrows.Where(x => x.TagID == Members[index].ID);
         }
 
@@ -294,5 +295,8 @@ namespace KonyvtariNyilvantarto
                 Members[memberEntryID] = new Member(newLine);
             }
         }
+
+        /* Kölcsönzések fül */
+
     }
 }
